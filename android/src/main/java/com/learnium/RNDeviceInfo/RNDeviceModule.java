@@ -209,9 +209,6 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
       }
       if (carrier == null || carrier.length() == 0) {
           carrier = "";
-          if (Countly.sharedInstance().isLoggingEnabled()) {
-              Log.i(Countly.TAG, "No carrier found");
-          }
       }
       return carrier;
   }
