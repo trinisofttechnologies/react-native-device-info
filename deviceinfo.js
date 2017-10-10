@@ -65,4 +65,7 @@ module.exports = {
   isPinOrFingerprintSet: function () {
     return RNDeviceInfo.isPinOrFingerprintSet;
   },
+  getDensity: function(){
+    return RNDeviceInfo.density;
+  }
 };

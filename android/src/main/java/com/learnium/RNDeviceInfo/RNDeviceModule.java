@@ -125,6 +125,94 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.put("timezone", TimeZone.getDefault().getID());
     constants.put("isEmulator", this.isEmulator());
     constants.put("isTablet", this.isTablet());
+    constants.put("density", this.getDensity(this.reactContext));
+    constants.put("carrier", this.getCarrier(this.reactContext));
     return constants;
+  }
+  /**
+   * Maps the current display density to a string constant.
+   * @param context context to use to retrieve the current display metrics
+   * @return a string constant representing the current display density, or the
+   *         empty string if the density is unknown
+   */
+  static String getDensity(final Context context) {
+      String densityStr = "";
+      final int density = context.getResources().getDisplayMetrics().densityDpi;
+      switch (density) {
+          case DisplayMetrics.DENSITY_LOW:
+              densityStr = "LDPI";
+              break;
+          case DisplayMetrics.DENSITY_MEDIUM:
+              densityStr = "MDPI";
+              break;
+          case DisplayMetrics.DENSITY_TV:
+              densityStr = "TVDPI";
+              break;
+          case DisplayMetrics.DENSITY_HIGH:
+              densityStr = "HDPI";
+              break;
+          //todo uncomment in android sdk 25
+          //case DisplayMetrics.DENSITY_260:
+          //    densityStr = "XHDPI";
+          //    break;
+          case DisplayMetrics.DENSITY_280:
+              densityStr = "XHDPI";
+              break;
+          //todo uncomment in android sdk 25
+          //case DisplayMetrics.DENSITY_300:
+          //    densityStr = "XHDPI";
+          //    break;
+          case DisplayMetrics.DENSITY_XHIGH:
+              densityStr = "XHDPI";
+              break;
+          //todo uncomment in android sdk 25
+          //case DisplayMetrics.DENSITY_340:
+          //    densityStr = "XXHDPI";
+          //    break;
+          case DisplayMetrics.DENSITY_360:
+              densityStr = "XXHDPI";
+              break;
+          case DisplayMetrics.DENSITY_400:
+              densityStr = "XXHDPI";
+              break;
+          case DisplayMetrics.DENSITY_420:
+              densityStr = "XXHDPI";
+              break;
+          case DisplayMetrics.DENSITY_XXHIGH:
+              densityStr = "XXHDPI";
+              break;
+          case DisplayMetrics.DENSITY_560:
+              densityStr = "XXXHDPI";
+              break;
+          case DisplayMetrics.DENSITY_XXXHIGH:
+              densityStr = "XXXHDPI";
+              break;
+          default:
+              densityStr = "other";
+              break;
+      }
+      return densityStr;
+  }
+
+  /**
+   * Returns the display name of the current network operator from the
+   * TelephonyManager from the specified context.
+   * @param context context to use to retrieve the TelephonyManager from
+   * @return the display name of the current network operator, or the empty
+   *         string if it cannot be accessed or determined
+   */
+  static String getCarrier(final Context context) {
+      String carrier = "";
+      final TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+      if (manager != null) {
+          carrier = manager.getNetworkOperatorName();
+      }
+      if (carrier == null || carrier.length() == 0) {
+          carrier = "";
+          if (Countly.sharedInstance().isLoggingEnabled()) {
+              Log.i(Countly.TAG, "No carrier found");
+          }
+      }
+      return carrier;
   }
 }
