@@ -67,5 +67,8 @@ module.exports = {
   },
   getDensity: function(){
     return RNDeviceInfo.density;
+  },
+  getCarrier: function(){
+    return RNDeviceInfo.carrier;
   }
 };
