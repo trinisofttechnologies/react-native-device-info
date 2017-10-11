@@ -217,8 +217,8 @@ RCT_EXPORT_MODULE()
              @"timezone": self.timezone,
              @"isEmulator": @(self.isEmulator),
              @"isTablet": @(self.isTablet),
-             @"density": self.density,
-             @"carrier": self.carrier
+             @"density": @"",
+             @"carrier": @""
              };
 }
 
