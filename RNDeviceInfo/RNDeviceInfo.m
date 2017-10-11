@@ -194,29 +194,31 @@ RCT_EXPORT_MODULE()
 
 + (NSString *)density
 {
-#if TARGET_OS_IOS
-    CGFloat scale = UIScreen.mainScreen.scale;
-#elif TARGET_OS_WATCH
-    CGFloat scale = WKInterfaceDevice.currentDevice.screenScale;
-#elif TARGET_OS_TV
-    CGFloat scale = 1.0;
-#else
-    CGFloat scale = NSScreen.mainScreen.backingScaleFactor;
-#endif
-    return [NSString stringWithFormat:@"@%dx", (int)scale];
+  return nil;
+// #if TARGET_OS_IOS
+//     CGFloat scale = UIScreen.mainScreen.scale;
+// #elif TARGET_OS_WATCH
+//     CGFloat scale = WKInterfaceDevice.currentDevice.screenScale;
+// #elif TARGET_OS_TV
+//     CGFloat scale = 1.0;
+// #else
+//     CGFloat scale = NSScreen.mainScreen.backingScaleFactor;
+// #endif
+//     return [NSString stringWithFormat:@"@%dx", (int)scale];
 }
 
 + (NSString *)carrier
 {
-#if TARGET_OS_IOS
-    if (NSClassFromString(@"CTTelephonyNetworkInfo"))
-    {
-        CTTelephonyNetworkInfo *netinfo = [CTTelephonyNetworkInfo new];
-        CTCarrier *carrier = [netinfo subscriberCellularProvider];
-        return [carrier carrierName];
-    }
-#endif
-    return nil;
+  return nil;
+// #if TARGET_OS_IOS
+//     if (NSClassFromString(@"CTTelephonyNetworkInfo"))
+//     {
+//         CTTelephonyNetworkInfo *netinfo = [CTTelephonyNetworkInfo new];
+//         CTCarrier *carrier = [netinfo subscriberCellularProvider];
+//         return [carrier carrierName];
+//     }
+// #endif
+//     return nil;
 }
 
 RCT_EXPORT_METHOD(isPinOrFingerprintSet:(RCTResponseSenderBlock)callback)
