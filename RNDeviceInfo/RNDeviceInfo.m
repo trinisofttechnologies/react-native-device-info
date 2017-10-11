@@ -163,34 +163,6 @@ RCT_EXPORT_MODULE()
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
-- (NSDictionary *)constantsToExport
-{
-    UIDevice *currentDevice = [UIDevice currentDevice];
-
-    NSString *uniqueId = [DeviceUID uid];
-
-    return @{
-             @"systemName": currentDevice.systemName,
-             @"systemVersion": currentDevice.systemVersion,
-             @"model": self.deviceName,
-             @"brand": @"Apple",
-             @"deviceId": self.deviceId,
-             @"deviceName": currentDevice.name,
-             @"deviceLocale": self.deviceLocale,
-             @"deviceCountry": self.deviceCountry ?: [NSNull null],
-             @"uniqueId": uniqueId,
-             @"bundleId": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"],
-             @"appVersion": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: [NSNull null],
-             @"buildNumber": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
-             @"systemManufacturer": @"Apple",
-             @"userAgent": self.userAgent,
-             @"timezone": self.timezone,
-             @"isEmulator": @(self.isEmulator),
-             @"isTablet": @(self.isTablet),
-             @"density": self.density,
-             @"carrier": self.carrier
-             };
-}
 
 + (NSString *)density
 {
@@ -220,6 +192,36 @@ RCT_EXPORT_MODULE()
 // #endif
 //     return nil;
 }
+
+- (NSDictionary *)constantsToExport
+{
+    UIDevice *currentDevice = [UIDevice currentDevice];
+
+    NSString *uniqueId = [DeviceUID uid];
+
+    return @{
+             @"systemName": currentDevice.systemName,
+             @"systemVersion": currentDevice.systemVersion,
+             @"model": self.deviceName,
+             @"brand": @"Apple",
+             @"deviceId": self.deviceId,
+             @"deviceName": currentDevice.name,
+             @"deviceLocale": self.deviceLocale,
+             @"deviceCountry": self.deviceCountry ?: [NSNull null],
+             @"uniqueId": uniqueId,
+             @"bundleId": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"],
+             @"appVersion": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: [NSNull null],
+             @"buildNumber": [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"],
+             @"systemManufacturer": @"Apple",
+             @"userAgent": self.userAgent,
+             @"timezone": self.timezone,
+             @"isEmulator": @(self.isEmulator),
+             @"isTablet": @(self.isTablet),
+             @"density": self.density,
+             @"carrier": self.carrier
+             };
+}
+
 
 RCT_EXPORT_METHOD(isPinOrFingerprintSet:(RCTResponseSenderBlock)callback)
 {
