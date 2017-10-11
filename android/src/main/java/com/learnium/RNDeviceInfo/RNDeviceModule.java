@@ -23,6 +23,10 @@ import java.util.TimeZone;
 
 import javax.annotation.Nullable;
 
+import android.telephony.TelephonyManager;
+import android.util.DisplayMetrics;
+
+
 public class RNDeviceModule extends ReactContextBaseJavaModule {
 
   ReactApplicationContext reactContext;
