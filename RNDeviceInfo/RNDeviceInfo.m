@@ -167,30 +167,30 @@ RCT_EXPORT_MODULE()
 + (NSString *)density
 {
   return nil;
-// #if TARGET_OS_IOS
-//     CGFloat scale = UIScreen.mainScreen.scale;
-// #elif TARGET_OS_WATCH
-//     CGFloat scale = WKInterfaceDevice.currentDevice.screenScale;
-// #elif TARGET_OS_TV
-//     CGFloat scale = 1.0;
-// #else
-//     CGFloat scale = NSScreen.mainScreen.backingScaleFactor;
-// #endif
-//     return [NSString stringWithFormat:@"@%dx", (int)scale];
+#if TARGET_OS_IOS
+    CGFloat scale = UIScreen.mainScreen.scale;
+#elif TARGET_OS_WATCH
+    CGFloat scale = WKInterfaceDevice.currentDevice.screenScale;
+#elif TARGET_OS_TV
+    CGFloat scale = 1.0;
+#else
+    CGFloat scale = NSScreen.mainScreen.backingScaleFactor;
+#endif
+    return [NSString stringWithFormat:@"@%dx", (int)scale];
 }
 
 + (NSString *)carrier
 {
   return nil;
-// #if TARGET_OS_IOS
-//     if (NSClassFromString(@"CTTelephonyNetworkInfo"))
-//     {
-//         CTTelephonyNetworkInfo *netinfo = [CTTelephonyNetworkInfo new];
-//         CTCarrier *carrier = [netinfo subscriberCellularProvider];
-//         return [carrier carrierName];
-//     }
-// #endif
-//     return nil;
+#if TARGET_OS_IOS
+    if (NSClassFromString(@"CTTelephonyNetworkInfo"))
+    {
+        CTTelephonyNetworkInfo *netinfo = [CTTelephonyNetworkInfo new];
+        CTCarrier *carrier = [netinfo subscriberCellularProvider];
+        return [carrier carrierName];
+    }
+#endif
+    return nil;
 }
 
 - (NSDictionary *)constantsToExport
@@ -198,7 +198,12 @@ RCT_EXPORT_MODULE()
     UIDevice *currentDevice = [UIDevice currentDevice];
 
     NSString *uniqueId = [DeviceUID uid];
+    NSString *carrier = self.carrier;
+    if (carrier){
 
+    }else{
+        carrier = @"";
+    }
     return @{
              @"systemName": currentDevice.systemName,
              @"systemVersion": currentDevice.systemVersion,
@@ -217,8 +222,8 @@ RCT_EXPORT_MODULE()
              @"timezone": self.timezone,
              @"isEmulator": @(self.isEmulator),
              @"isTablet": @(self.isTablet),
-             @"density": @"",
-             @"carrier": @""
+             @"density": self.density,
+             @"carrier": carrier
              };
 }
 

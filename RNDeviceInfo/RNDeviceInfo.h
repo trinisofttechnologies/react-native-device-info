@@ -15,6 +15,11 @@
     #import <React/RCTBridgeModule.h>
 #endif
 
+#if TARGET_OS_IOS
+    #import <CoreTelephony/CTTelephonyNetworkInfo.h>
+    #import <CoreTelephony/CTCarrier.h>
+#endif
+
 @interface RNDeviceInfo : NSObject <RCTBridgeModule>
 
 @end
