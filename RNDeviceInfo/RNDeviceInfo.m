@@ -199,6 +199,11 @@ RCT_EXPORT_MODULE()
 
     NSString *uniqueId = [DeviceUID uid];
     NSString *carrier = self.carrier;
+    NSString * density = self.density;
+    if(density){
+    }else{
+        density = @"";
+    }
     if (carrier){
 
     }else{
@@ -222,7 +227,7 @@ RCT_EXPORT_MODULE()
              @"timezone": self.timezone,
              @"isEmulator": @(self.isEmulator),
              @"isTablet": @(self.isTablet),
-             @"density": self.density,
+             @"density": density,
              @"carrier": carrier
              };
 }
