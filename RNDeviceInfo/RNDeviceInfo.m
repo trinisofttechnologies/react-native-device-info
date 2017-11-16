@@ -164,7 +164,7 @@ RCT_EXPORT_MODULE()
 }
 
 
-+ (NSString *)density
+- (NSString *)density
 {
   return nil;
 #if TARGET_OS_IOS
@@ -179,7 +179,7 @@ RCT_EXPORT_MODULE()
     return [NSString stringWithFormat:@"@%dx", (int)scale];
 }
 
-+ (NSString *)carrier
+- (NSString *)carrier
 {
   return nil;
 #if TARGET_OS_IOS
